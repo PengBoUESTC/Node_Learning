@@ -76,7 +76,7 @@
 + ~~~bash
   git commit -m <"message"> // 将暂存区中的文件全部提交到仓库
   git commit [filename] [filename] -m <"message"> // 将暂存区中的指定文件提交到仓库
-  git commit -a // 直接将工作区中的文件提交到 仓库
+  git commit -a // 直接将工作区中的文件提交到 仓库  
   
   git commit -v // 提交时显示 diff 信息
   git commit --amend -m <"message"> // 使用一次新的提交取代上一次提交，若代码无变化则可以改写commit 提交信息
@@ -98,7 +98,7 @@
   
   git diff // 显示暂存区与工作区的差异
   git diff --cached // 显示暂存区与 上一次 commit 之间的差异
-  git diff HEAD // 显示工作区与最新 commit 之间的擦会议
+  git diff HEAD // 显示工作区与最新 commit 之间的擦会议  
   
   git show <commit> <filename> // 显示某次提交时 指定文件的内容
   ~~~
@@ -107,12 +107,12 @@
 
 + ~~~bash
   git remote -v // 显示所有的远程仓库
-  git remote show <remote> // 显示指定远程仓库的详细信息
+  git remote show <remote> // 显示指定远程仓库的详细信息  
   
-  git remote add <name> <url> // 添加远程仓库
+  git remote add <name> <url> // 添加远程仓库  
   
   git pull <remote> <branch> // 取回远程仓库并与本地合并
-  git push <remote> <branch> // 将本地仓库指定分支上传到远程仓库
+  git push <remote> <branch> // 将本地仓库指定分支上传到远程仓库  
   
   git push <remote> --all // 推送所有分支到远程仓库
   ~~~
@@ -121,7 +121,7 @@
 
 + ~~~bash
   git checkout [filename] // 将指定文件从暂存区恢复到工作区
-  git checkout . // 恢复所有暂存区中的文件到龚总区
+  git checkout . // 恢复所有暂存区中的文件到工作区
   
   git checkout <commit> <filename> //恢复 指定 commit 指定 文件到暂存区与 工作区
   ~~~
