@@ -87,6 +87,29 @@
 
 #### 分支
 
++ ~~~bash
+  git branch // 用于查看所有分支
+  git branch -r // 列出所有远程分支
+  git branch -a // 列出所有本地分支与远程分支
+  ~~~
+
++ ~~~bash
+  git branch <branch-name> //新建一条分支
+  git checkout -b <branch-name> // 新建一条分支 帮切换到该分支
+  git checkout <branch-name> // 切换到指定分支 并更新工作区
+  git checkout - // 切换到上一次分支 并更新工作区
+  ~~~
+
++ ~~~bash
+  git merge <branch-name> // 将指定分支合并到当前分支
+  ~~~
+
++ ~~~bash
+  git branch -d <branch-name> // 删除指定分支
+  ~~~
+
++ **在分支 commit 之前 对文件内容的修改对所有分支来说是共享的**
+
 #### 标签
 
 #### 查看信息
@@ -139,4 +162,30 @@
 ### Git相关操作
 
 + git push 的远程仓库通过 windows 的凭据管理器进行删除
-+ 
+
+**功能驱动式开发 （FDD）**
+
+### git-flow
+
++ 一个master 用于发布给客户端
++ 一个 develop 用于开发
++ 工作人员通过 在 develop 创建分支， 进行操作 
+  - Feature branches --> 用于添加新的功能
+  - Release branches --> 用于
+  - Hotfix branches
++ 测试版 通过在  develop 创建新分支 （release-"分支名"）进行发布，测试结束后，将其合并到master 与develop, 删除该分支
++ master 出现 bug 后在 master 创建新的分支 （bugfix-"分支名"） 用于bug 修复，完成后合并到 master 与 develop，删除该分支。
++ github 通过 collaborator 添加协作者，为其他用户添加写操作
+
+### github - flow
+
++ 通过 Pull-Request 进行代码的合并
++ 通过 fork  在 github 上下载别人的代码
++ 在自己的仓库完成提交
++ 发起 pull -request 请求
++ 原始仓库 处理 PR 请求， 进行代码合并
+
+### gitlab-flow
+
++ gitlab 开源的类似 github 的第三方托管服务，可以免费的部署到公司内部
+
