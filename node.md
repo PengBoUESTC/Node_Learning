@@ -39,6 +39,10 @@ tags: Node
 
 + 通过 ```node XXX.js```  执行JS 脚本
 
++ 通过命令 ```npm root -g ``` 查看全局安装目录
+
++ **node 执行 js 文件时，其中的路径为相对于 node 命令执行时的路径**
+
 ### 3 NPM 介绍
 
 + npm: npde package manager, 用于安装包或者插件
@@ -75,6 +79,19 @@ npm install --production // 仅仅下载 dependencies 记录的依赖项
 	
 	+ 用于自定义 命令行 命令
 
+	+ 命令定义格式
+	~~~bash
+	"scripts":{
+	"start": "命令行需要执行的命令",
+	"start": "node main.js"
+	"prebuild": "" // build 命令执行之前自动执行的命令
+	"build": "npx babel src --out-file dist"
+	"postbuild": "node ./dist/app.js"  //build 命令执行之后自动执行的命令
+	}
+	~~~
+
+	+ ```npm run myOrder``` // 当命令名是 ```start``` 时， 可以省略 ``` run ```
+
 ### 5 npm 的应用
 
 + 安装依赖项
@@ -99,6 +116,11 @@ npm install -g <package-name> // 在全局安装依赖项
 + **http**
 
 + **fs**
+
+	+ 文件异步读取
+	~~~bash
+	fs.readFile(path [, options], (err, data) => {}))
+	~~~
 
 + **path**
 
@@ -193,7 +215,7 @@ app.post('/', (req, res)=>{
 
 	+ 渲染模板引擎
 	~~~bash
-	res.render()
+	res.render('特定扩展名的文件名')
 	~~~
 
 	+ 重定向
@@ -364,6 +386,12 @@ app.post('/', (req, res)=>{
 		~~~bash
 		app.engine('ext', require("express-art-template"))
 		~~~
+
+		+ **路径问题**: 该模板引擎默认搜索路径为 当前目录下的 views 文件夹，可通过 app.set() 进行修改
+		~~~bash
+		app.set('views', '../views') // 设置为父级目录的 views 文件夹
+		~~~
+
 
 + 在 express 中使用模板引擎
 

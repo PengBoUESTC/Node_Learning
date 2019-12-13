@@ -1,20 +1,14 @@
-let express = require("express")
-let fs = require('fs')
+// let express = require("express")
+// let fs = require('fs')
+
+// 通过 ES6 模块化方式导入模块
+import express from "express"
+import fs from "fs"
 
 let router = express.Router()
 
 router.get('/', (req, res)=>{
-	fs.readFile('../public/index.html', (err, data)=>{
-		if(!err){
-			console.log('数据读取成功')
-			console.log(req.query)
-			res.end(data)
-		}
-		else{
-			console.log('数据读取失败')
-			res.end()
-		}
-	})
+	res.render('index.html')
 })
 
 router.get('/images/logo.html', (req, res)=>{
@@ -22,4 +16,7 @@ router.get('/images/logo.html', (req, res)=>{
 	res.end()
 })
 
-module.exports = router
+// module.exports = router
+
+// 通过 ES6 方式导出模块
+export default router
