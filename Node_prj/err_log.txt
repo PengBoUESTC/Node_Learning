@@ -1,0 +1,15 @@
+
+		错误名： SyntaxError
+		错误信息： Unexpected token a in JSON at position 1
+		错误堆栈： SyntaxError: Unexpected token a in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at C:\Users\18232\Desktop\Node_Learning\Node_prj\src/router.js:16:20
+    at Layer.handle [as handle_request] (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:174:3)
+		

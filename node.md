@@ -223,9 +223,15 @@ app.post('/', (req, res)=>{
 	res.redirect()
 	~~~
 
-	+ 发送 ```JSON``` 响应
+	+ 发送 ```JSON``` 响应，将数据转换为 JSON 字符串发送
 	~~~bash
 	res.json()
+	~~~
+
+	+ 发送状态码
+	~~~bash
+	res.status(500).end('message')
+	res.sendStatus(500) //与以上代码等效
 	~~~
 
 + ```req``` 属性
@@ -328,9 +334,29 @@ app.post('/', (req, res)=>{
 	~~~
 	**使用了 Node 中的 path 模块**
 
+	+ 手动封装静态资源中间件
+	~~~bash
+	app.use('staticPath', static(dirPath))
+	// 当 use 中指定了 staticPath 参数时， req 对象中的 path 属性将去除 staticPath 字符串
+	// use 中指定了匹配路径， 因此不用手动调用 next() 方法
+	function static(dirPath){
+		return (req, res, next)=> {
+			let urlPath = path.join(dirPath, req.path)
+			fs.readFile(urlPath, (err, data)=>{
+				if(err){
+					return res.end('404 Not Found')
+				}
+				res.end()
+			})
+		}
+	}
+	~~~
+
 + 中间件
 
 	+ 中间件函数是能够在 ```request-response``` 环中能够访问 ```req``` 对象与 ```res``` 对象， 以及下一个中间件函数的的函数
+
+	+ 中间件用来处理 http 请求的一个环节，通过 处理 ```req``` 与 ```res``` 对象。
 
 	+ 中间件可以执行以下功能
 
@@ -340,7 +366,26 @@ app.post('/', (req, res)=>{
 
 		+ 终结 ```request-response``` 环
 
-		+ 调用下一个 中间件函数 （next 参数）
+		+ 调用下一个 中间件函数 （next 参数， 不执行 next 方法， 中间件不会再继续执行）
+
+	+ 中间件几种使用方式
+
+		+ 不关心请求路由，所有的请求都会经过该方法的处理
+		~~~bash
+		app.use(function(req, res, next){})
+		~~~
+
+		+ 根据请求路由，执行 callback
+		~~~bash
+		app.use('path', function(req, res, next){})
+		~~~
+
+		+ 具体路由规则中间件
+		~~~bash
+		app.get('path', function(req, res){})
+		app.post('path', function(req, res){})
+		...
+		~~~
 
 	+ ```body-parser``` 中间件配置
 
@@ -392,6 +437,28 @@ app.post('/', (req, res)=>{
 		app.set('views', '../views') // 设置为父级目录的 views 文件夹
 		~~~
 
++ 自定义中间件
+	
+	+ **注意中间件的顺序**
+
+	+ 静态资源中间件处理
+
+	+ 日志信息记录中间件
+
+	+ 404 页面信息处理中间件
+
+	+ 全局的错误处理
+
+		+ 记录错误日志 为匿名函数明明可以获取更加具体的错误信息
+
+		+ ```try{}catch(e){}``` 在catch 中记录错误日志
+
+		+ 客户端响应 500 
+
+		+ **Express 中的全局错误处理中间件，该中间件只有带有参数的 next 才能调用到 next(err)**
+		~~~bash
+		app.use((err, req, res, next)=>{})
+		~~~
 
 + 在 express 中使用模板引擎
 

@@ -11,9 +11,15 @@ router.get('/', (req, res)=>{
 	res.render('index.html')
 })
 
-router.get('/images/logo.html', (req, res)=>{
-	console.log("请求静态文件")
-	res.end()
+router.get('/err', (req, res, next)=>{
+	try{
+		const str = JSON.parse('{abc')
+		res.json(str)
+	}catch(e){
+		res.status(500).end()
+		next(e)
+	}
+
 })
 
 // module.exports = router
