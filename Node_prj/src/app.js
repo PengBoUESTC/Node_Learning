@@ -8,6 +8,8 @@ import { join } from "path"
 import bodyParser from "body-parser"
 import router from "./router"
 import fs from "fs"
+import nunjucks from "nunjucks"
+
 // 自定义中间件的使用
 const log = require("../midware/log.js")
 const errPage = require("../midware/404.js")
@@ -25,9 +27,12 @@ app.use('/node_modules', express.static(join(__dirname, "../node_modules")))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
-// 配置模板引擎
-app.engine('html', require("express-art-template"))
+// 配置模板引擎 art-template
+// app.engine('html', require("express-art-template"))
 // app.set('views', '../views')
+
+// 配置模板引擎
+nunjucks.configure('views', { autoescape: true, express: app})
 
 // 配置路由
 app.use(router)

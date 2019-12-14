@@ -122,6 +122,11 @@ npm install -g <package-name> // 在全局安装依赖项
 	fs.readFile(path [, options], (err, data) => {}))
 	~~~
 
+	+ 文件内容追加
+	~~~bash
+	fs.appendFile('path', content, err=>{})
+	~~~
+
 + **path**
 
 	+ ```path.join([string...])``` : 将参数拼接成可用的路径
@@ -200,6 +205,8 @@ app.post('/', (req, res)=>{
 
 //路径支持正则表达
 ~~~
+
+#### 7.3 ```express``` API
 
 + ```res``` 的方法
 
@@ -282,7 +289,6 @@ app.post('/', (req, res)=>{
 
 	+ ```app.set()```
 
-
 	+ ```app.use()``` ： 挂载中间件
 
 		+ 挂载指定的中间件，到指定的路径，当请求路径匹配时执行中间件函数
@@ -298,11 +304,11 @@ app.post('/', (req, res)=>{
 
 	+ ```express.Router``` 是一个类， 用于创建模块化的路由处理程序模块
  	~~~bash
- 	const express = require("express")
- 	let router = express.Router()
- 	router.get('/', ()=>{})
- 	router.post('/', ()=>{})
- 	module.exports = router
+	const express = require("express")
+	let router = express.Router()
+	router.get('/', ()=>{})
+	router.post('/', ()=>{})
+	module.exports = router
  	~~~
 
 	+ 在 ```app.js``` 中引入该 ```router``` 模块
@@ -311,6 +317,8 @@ app.post('/', (req, res)=>{
 	app.use('', router)
 	~~~
 
+
+#### 7.4 静态资源
 
 + 设置静态文件
 	
@@ -352,7 +360,9 @@ app.post('/', (req, res)=>{
 	}
 	~~~
 
-+ 中间件
+#### 7.5 中间件
+
++ 中间件介绍
 
 	+ 中间件函数是能够在 ```request-response``` 环中能够访问 ```req``` 对象与 ```res``` 对象， 以及下一个中间件函数的的函数
 
@@ -387,86 +397,134 @@ app.post('/', (req, res)=>{
 		...
 		~~~
 
-	+ ```body-parser``` 中间件配置
++ ```body-parser``` 中间件配置
 
-		+ 中间件安装 
-		~~~bash
-		npm install --save body-parser
-		~~~
-
-		+ 引入包
-		~~~bash
-		let bodyParser = require('body-parser')
-		~~~
-
-		+ 配置中间件
-		~~~bash
-		app.use(bodyParser.json())
-		app.use(bodyParser.urlencoded({ extened: true }))
-		~~~
-
-	+ ```cookie-parser``` 中间件
-
-		+ 安装
-
-		+ 引入包
-		~~~bash
-		let cookieParser = require("cookie-parser)
-		~~~
-
-		+ 配置中间件
-		~~~bash
-		app.use(cookieParser())
-		~~~
-
-	+ ```art-template``` 中间件
-
-		+ 安装 中间件
-		~~~bash
-		npm install art-template --save
-		npm install express-art-template --save
-		~~~
-
-		+ 配置中间件
-		~~~bash
-		app.engine('ext', require("express-art-template"))
-		~~~
-
-		+ **路径问题**: 该模板引擎默认搜索路径为 当前目录下的 views 文件夹，可通过 app.set() 进行修改
-		~~~bash
-		app.set('views', '../views') // 设置为父级目录的 views 文件夹
-		~~~
-
-+ 自定义中间件
-	
-	+ **注意中间件的顺序**
-
-	+ 静态资源中间件处理
-
-	+ 日志信息记录中间件
-
-	+ 404 页面信息处理中间件
-
-	+ 全局的错误处理
-
-		+ 记录错误日志 为匿名函数明明可以获取更加具体的错误信息
-
-		+ ```try{}catch(e){}``` 在catch 中记录错误日志
-
-		+ 客户端响应 500 
-
-		+ **Express 中的全局错误处理中间件，该中间件只有带有参数的 next 才能调用到 next(err)**
-		~~~bash
-		app.use((err, req, res, next)=>{})
-		~~~
-
-+ 在 express 中使用模板引擎
-
-	+ 安装对应的模板引擎 
+	+ 中间件安装 
 	~~~bash
-	npm install --save xxx
+	npm install --save body-parser
 	~~~
 
-	+ 通过 ```app.set``` 配置模板引擎
+	+ 引入包
+	~~~bash
+	let bodyParser = require('body-parser')
+	~~~
 
-	+ 使用 ```res.render()``` 使用模板引擎
+	+ 配置中间件
+	~~~bash
+	app.use(bodyParser.json())
+	app.use(bodyParser.urlencoded({ extened: true }))
+	~~~
+
++ ```cookie-parser``` 中间件
+
+	+ 安装
+
+	+ 引入包
+	~~~bash
+	let cookieParser = require("cookie-parser)
+	~~~
+
+	+ 配置中间件
+	~~~bash
+	app.use(cookieParser())
+	~~~
+
+#### 7.6 自定义中间件
+	
++ **注意中间件的顺序**
+
++ 静态资源中间件处理
+
++ 日志信息记录中间件
+
++ 404 页面信息处理中间件
+
++ 全局的错误处理
+
+	+ 记录错误日志 为匿名函数明明可以获取更加具体的错误信息
+
+	+ ```try{}catch(e){}``` 在catch 中记录错误日志
+
+	+ 客户端响应 500 
+
+	+ **Express 中的全局错误处理中间件，该中间件只有带有参数的 next 才能调用到 next(err)**
+	~~~bash
+	app.use((err, req, res, next)=>{})
+	~~~
+
+### 8 nunjucks 模板引擎
+
+#### 8.1 快速开始
+
++ 安装 nunjucks
+~~~bash
+npm install nunjucks --save
+~~~
+
++ 引入 nunjucks
+~~~bash
+const nunjucks = require('nunjucks')
+~~~
+
++ 配置 nunjucks
+~~~bash
+const app = express()
+nunjucks.configure('path', { autoescape: true, express: app })
+// path 为模板引擎自动查找文件的目录路径
+~~~
+
+#### 8.2 模块化提取
+
++ ```block``` ： 单个页面模块，如一个```<div>```，不是完整的 html 页面
+~~~bash
+{% block anchor %}
+{% endblock %}
+~~~
+
++ ```include``` : 通过引用模块页构造模板页，留下 “坑”，便于实际页面填充
+~~~bash
+{% include "file_path" %}
+{% block anchor %}
+{% endblock %}
+~~~
+
++ ```extend``` ： 通过继承构造页实现实际的```html``` 页面，填充构造页的 “坑”
+~~~bash
+{% extend "layout_file" %}
+{% block anchor %}
+{% endblock %}
+~~~
+
+### 9 art-template 模板引擎
+
+#### 9.1 快速开始
+
++ 安装 中间件
+~~~bash
+npm install art-template --save
+npm install express-art-template --save
+~~~
+
++ 配置中间件
+~~~bash
+app.engine('ext', require("express-art-template"))
+~~~
+
++ **路径问题**: 该模板引擎默认搜索路径为 当前目录下的 views 文件夹，可通过 app.set() 进行修改
+~~~bash
+app.set('views', '../views') // 设置为父级目录的 views 文件夹
+~~~
+
+#### 9.2 模块化提取
+
++ template inheritance ： 通过继承模板页实现实际的 ```html``` 页面
+~~~bash
+{{ extend "layOut_filePath" }}
+{{ block "anchor" }}
+{{ /block }}
+~~~
+
++ Sub template : 通过引用一个个的模块构造模板页
+~~~bash 
+{{ include "sub_filePath" }}
+~~~

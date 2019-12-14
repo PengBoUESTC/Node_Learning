@@ -8,7 +8,7 @@ import fs from "fs"
 let router = express.Router()
 
 router.get('/', (req, res)=>{
-	res.render('index.html')
+	res.render('index.html', { name: "nunjucks"})
 })
 
 router.get('/err', (req, res, next)=>{
