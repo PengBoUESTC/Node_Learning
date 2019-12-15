@@ -490,7 +490,7 @@ nunjucks.configure('path', { autoescape: true, express: app })
 
 + ```extend``` ： 通过继承构造页实现实际的```html``` 页面，填充构造页的 “坑”
 ~~~bash
-{% extend "layout_file" %}
+{% extends "layout_file" %}
 {% block anchor %}
 {% endblock %}
 ~~~
@@ -527,4 +527,111 @@ app.set('views', '../views') // 设置为父级目录的 views 文件夹
 + Sub template : 通过引用一个个的模块构造模板页
 ~~~bash 
 {{ include "sub_filePath" }}
+~~~
+
+### 10 杂项
+
+#### 10.1 手动封装 post 数据获取中间件
+
++ 当 post 数据量较大时，数据会分多次进行提交
+
++ 通过 req 对象的事件进行数据的拼接
+
++ 数据传入时会触发 data 事件
+~~~bash
+app.use((req, res, next)=>{
+	let body = ''
+	req.on('data', chunk=>{
+		body += chunk
+	})
+	req.on('end',()={
+		//数据的二次处理
+		next()
+	})
+})
+~~~
+
+#### 10.2 jsonp
+
++ 跨域
+	
+	+ 域名不同， 协议不同， 端口号不同
+
++ 后端返回的数据，前端会根据**标签**进行解析执行，如img 标签的返回数据会尝试解析为 图片， link 会尝试解析为样式表，而 ```script``` 标签会解析为 js 代码进行执行
+
++ 什么可以跨域
+
+	+ img 图片标签
+
+		+ 只能获取图片，数据类型受到限制
+
+	+ link 样式表
+
+		+ 将返回数据解析为 css 样式
+
+	+ script 脚本标签
+
+		+ 将想要得到的数据使用**函数**包裹起来之后再以字符串的形式返回
+
+		+ 由于**函数**由前端定义，因此需要通过 **查询字符串** 的方式将 **函数名** 传递给后端。
+
+		+ 只支持 ```get``` 方式的请求
+
+	+ 封装 ```jsonp```
+
++ 服务端的跨域方式
+
+#### 10.3 nvm 
+
++ Node Version Management
+
++ 用于切换 node 版本
+
++ ```nvm list ``` 查看所有的 安装的node 版本
+
++ ```nvm insttall x.x.x``` : 安装特定版本的node 
+
++ ```nvm use x.x.x``` : 切换到特定的 node 版本
+
+#### 10.4 nrm
+
++ Node Registry manager : 镜像
+
++ ```npm install nrm -g``` 
+
++ 使用 nrm 管理镜像源
+```bash
+nrm use xxx
+```
+
+#### 10.5 yarn
+
++ 由Facebook 推出的，开源的类似于 npm 的包管理工具
+
++ ```npm install yarn```
+
++ 使用
+~~~bash
+npm init 
+yarn init 
+
+npm install xxx --save 
+yarn add xxx
+
+npm install 
+yarn install 
+
+npm uninstall xxx
+yarn remove xxx
+
+npm install -g xxx
+yarn global add xxx
+
+npm uninstall -g xxx
+yarn global remove xxx
+~~~
+
++ 离线安装
+~~~bash
+yarn add xxx --offline
 ~~~

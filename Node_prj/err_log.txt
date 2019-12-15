@@ -1,9 +1,9 @@
 
-		错误名： SyntaxError
-		错误信息： Unexpected token a in JSON at position 1
-		错误堆栈： SyntaxError: Unexpected token a in JSON at position 1
-    at JSON.parse (<anonymous>)
-    at C:\Users\18232\Desktop\Node_Learning\Node_prj\src/router.js:16:20
+		错误名： TypeError [ERR_INVALID_ARG_TYPE]
+		错误信息： The "chunk" argument must be one of type string or Buffer. Received type object
+		错误堆栈： TypeError [ERR_INVALID_ARG_TYPE]: The "chunk" argument must be one of type string or Buffer. Received type object
+    at ServerResponse.end (_http_outgoing.js:690:13)
+    at C:\Users\18232\Desktop\Node_Learning\Node_prj\src/router.js:32:7
     at Layer.handle [as handle_request] (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\layer.js:95:5)
     at next (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\route.js:137:13)
     at Route.dispatch (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\route.js:112:3)
@@ -12,4 +12,20 @@
     at Function.process_params (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:335:12)
     at next (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:275:10)
     at Function.handle (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\express\lib\router\index.js:174:3)
+		错误时间： Sun Dec 15 2019 17:15:58 GMT+0800 (GMT+08:00)
+		
+		错误名： SyntaxError
+		错误信息： Unexpected token ' in JSON at position 0
+		错误堆栈： SyntaxError: Unexpected token ' in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at createStrictSyntaxError (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\body-parser\lib\types\json.js:158:10)
+    at parse (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\body-parser\lib\types\json.js:83:15)
+    at C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\raw-body\index.js:224:16)
+    at done (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (C:\Users\18232\Desktop\Node_Learning\Node_prj\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (events.js:194:15)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+		错误时间： Sun Dec 15 2019 17:22:22 GMT+0800 (GMT+08:00)
 		

@@ -1,0 +1,23 @@
+<!-- 这里是页面的布局模板 -->
+<!-- 通过include 将页面的每个模块引入进来 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %} 默认的标题 {% endblock %}</title>
+	{% block style %}
+	{% endblock %}
+</head>
+<body>
+	{% include "header.html" %}
+	{% include "sidebar.html" %}
+	{% include "footer.html" %}
+
+	{% block body%}
+	默认的body
+	{% endblock %}
+
+	{% block script %}
+	{% endblock %}
+</body>
+</html>

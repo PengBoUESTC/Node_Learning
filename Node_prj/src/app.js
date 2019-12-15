@@ -23,6 +23,9 @@ let app = express()
 app.use('/public', express.static(join(__dirname, '../public')))
 app.use('/node_modules', express.static(join(__dirname, "../node_modules")))
 
+// 配置模板引擎
+nunjucks.configure('views', { autoescape: true, express: app})
+
 // 配置 body-parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -31,8 +34,21 @@ app.use(bodyParser.urlencoded({ extended: true}))
 // app.engine('html', require("express-art-template"))
 // app.set('views', '../views')
 
-// 配置模板引擎
-nunjucks.configure('views', { autoescape: true, express: app})
+// 手动设置post 数据获取中间件
+app.use((req, res, next)=>{
+	let body = ''
+
+	req.on('data', chunk=>{
+		console.log(body)
+		body += chunk
+	})
+
+	req.on('end', ()=>{
+		console.log(body)
+		req.body = body
+		next()
+	})
+})
 
 // 配置路由
 app.use(router)
@@ -44,6 +60,7 @@ app.use((err, req, res, next)=>{
 		错误名： ${ err.name }
 		错误信息： ${ err.message }
 		错误堆栈： ${ err.stack }
+		错误时间： ${ new Date() }
 		`
 		fs.appendFile('./err_log.txt', err_log, err=>{
 			if(err){console.log('错误信息写入错误')}

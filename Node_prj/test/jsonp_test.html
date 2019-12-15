@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jsonp</title>
+</head>
+<body>
+<script type="text/javascript" src = "./midware/jsonp.js"></script>
+<script type="text/javascript">
+	jsonp({
+		url: "http://localhost:3000",
+		success: function(data){
+			console.log(data)
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		Node 全栈 - 首页
-	</title>
-	<meta charset="utf-8">
-</head> 
-<body>
-	<h1>首页</h1>
-	<p>{{ name }}</p>
-</body>
-</html>
+<!-- 这里是页面部分，通过继承模板页得到实际的页面  -->
+{% extends "layout.html" %}
+{% block title %} 首页 {% endblock %}
+{% block body %} 
+<a href="/advert_list">广告管理页面</a>
+{% endblock %}
+
+
+{% block script %}
+
+{% endblock %}
