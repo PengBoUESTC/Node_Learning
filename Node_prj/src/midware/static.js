@@ -1,9 +1,9 @@
 // 封装静态资源处理中间件，
 
-const path = require("path")
-const fs = require("fs")
+import path from "path"
+import fs from "fs"
 
-module.exports = function(dirPth){
+export default dirPth => {
 	return (req, res, next)=>{
 		// 获取文件路径
 		// 当app.use('path', callback) 中指定了 path 参数，通过 req.path 获取的路径将不包含该字符串

@@ -1,7 +1,7 @@
 // 用于记录任意请求的请求方法与请求时间等信息
 const fs = require("fs")
 
-module.exports = function(){
+export default () => {
 	return (req, res, next)=>{
 		// // 获取请求方式
 		// console.log(req.method)

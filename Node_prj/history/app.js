@@ -1,15 +1,18 @@
+// const express = require("express")
+// const path = require("path")
+// const bodyParser = require("body-parser")
+// const router = require("./router")
+
 import express  from "express"
 import { join } from "path"
+// import bodyParser from "body-parser"
+// import fs from "fs"
 import nunjucks from "nunjucks"
 
-// 导入自定义中间件
+import router from "./router"
 import mybodyParser from "./midware/body_parser"
 import errPage from "./midware/404"
 import errlog from "./midware/err_log"
-
-// 导入模块化路由
-import advertRouter from "./routes/advertRouter"
-import indexRouter from "./routes/indexRouter"
 
 let app = express()
 
@@ -24,8 +27,7 @@ nunjucks.configure('views', { autoescape: true, express: app})
 app.use(mybodyParser)
 
 // 配置路由
-app.use(advertRouter)
-app.use(indexRouter)
+app.use(router)
 
 // 错误处理中间件， 当调用 next(err) 时才会调用此中间件
 app.use(errlog)

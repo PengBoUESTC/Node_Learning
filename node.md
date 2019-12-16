@@ -206,6 +206,15 @@ app.post('/', (req, res)=>{
 //路径支持正则表达
 ~~~
 
++ 路由的模糊匹配方式,通过正则匹配的方式进行路由的设计
+~~~bash
+app.get('/advert/id/：advertId', ()=>{})
+//通过req.params.advertId获取url请求的参数，从而进行数据的筛选
+
+//为匹配字符串增加更多的控制，可通过以下方式
+app.get('/advert/id/:advert(\+d)',()=>{})
+~~~
+
 #### 7.3 ```express``` API
 
 + ```res``` 的方法
@@ -278,6 +287,11 @@ app.post('/', (req, res)=>{
 	+ 获取url 的 query 部分
 	~~~bash
 	req.query
+	~~~
+
+	+ 获取url 中正则匹配的参数
+	~~~bash
+	req.params.id
 	~~~
 
 + ```app``` 方法
@@ -376,7 +390,7 @@ app.post('/', (req, res)=>{
 
 		+ 终结 ```request-response``` 环
 
-		+ 调用下一个 中间件函数 （next 参数， 不执行 next 方法， 中间件不会再继续执行）
+		+ 调用下一个 中间件函数 **（next 参数， 不执行 next 方法， 后面的中间件不会再继续执行，执行完匹配后的中间件后，若没有 return next, 则next 之后的代码也会执行）**
 
 	+ 中间件几种使用方式
 

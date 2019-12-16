@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-module.exports = function(){
+export default () => {
 	return (req, res, next)=>{
 
 		// 文件读取中的路径为 相对于 node 命令执行的目录
