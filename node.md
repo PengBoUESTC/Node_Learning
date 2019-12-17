@@ -429,6 +429,42 @@ app.get('/advert/id/:advert(\+d)',()=>{})
 	app.use(bodyParser.urlencoded({ extened: true }))
 	~~~
 
++ **formidable 表单数据解析中间件** ，用于文件的解析
+
++ form 表单提交数据包含文件时，其 enctype 属性必须为 multipart/form-data ， method 必须为 post
+
++ 安装中间件
+~~~bash
+npm install --save formidable
+~~~
+
++ 引入中间件
+~~~bash
+const formidable = require("formidable")
+import formidable from "formidable"
+~~~
+
++ 使用中间件
+~~~bash
+app.post('path', (req, res, next)=>{
+	const form = new formidable.IncomingForm()
+
+	//配置中间件, 文件的大小，数量，校验，扩展名，存储目录等
+	form.keepExtensions = true
+	form.uploadDir = "filePath"
+
+	//fileds 为普通字段， files 为文件数据
+	form.parse(req, (err, fileds, files)=>{
+		//数据的处理
+	})
+
+	// form 上的事件 progress: 当上传的数据开始解析时， filed: 一组数据接收到 fileBegin: 一个新文件开始上传 file： 一个文件上传完毕 。。。。。。
+	form.on("progress", ()=>{
+
+	})
+})
+~~~
+
 + ```cookie-parser``` 中间件
 
 	+ 安装
@@ -649,3 +685,7 @@ yarn global remove xxx
 ~~~bash
 yarn add xxx --offline
 ~~~
+
+#### 10.6 表单的异步提交与同步提交
+
++ 

@@ -3,7 +3,7 @@ import Advert from "../models/advert"
 
 const advertRouter = express.Router()
 // 呈现广告管理页面
-router.get('/advert_list', (req, res, next)=>{
+advertRouter.get('/advert_list', (req, res, next)=>{
 	try{
 		res.render('advert_list.html')
 	}catch(e){
@@ -13,7 +13,7 @@ router.get('/advert_list', (req, res, next)=>{
 })
 
 // 呈现广告添加页面
-router.get('/advert/add', (req, res, next)=>{
+advertRouter.get('/advert/add', (req, res, next)=>{
 	try{
 		res.render('advert_add.html')
 	}catch(e){
@@ -23,7 +23,7 @@ router.get('/advert/add', (req, res, next)=>{
 })
 
 // 处理广告添加信息表单数据,进行数据库的操作
-router.post('/advert/add', (req, res, next)=>{
+advertRouter.post('/advert/add', (req, res, next)=>{
 	try{
 		let message = new Advert({
 			title: req.body.title,
@@ -45,7 +45,7 @@ router.post('/advert/add', (req, res, next)=>{
 })
 
 // 返回数据库中的数据
-router.get('/advert/list', (req, res, next)=>{
+advertRouter.get('/advert/list', (req, res, next)=>{
 	try{
 		Advert.find((err, docs)=>{
 			if(err){
@@ -60,7 +60,7 @@ router.get('/advert/list', (req, res, next)=>{
 })
 
 // 返回指定的数据
-router.get('/advert/id/:advertId', (req, res, next)=>{
+advertRouter.get('/advert/id/:advertId', (req, res, next)=>{
 	try{
 		let id = req.params.advertId
 		Advert.find({ _id : id}, (err, docs)=>{
@@ -77,7 +77,7 @@ router.get('/advert/id/:advertId', (req, res, next)=>{
 })
 
 // 数据修改，根据ID 修改
-router.post('/advert/modify/:advertId', (req, res, next)=>{
+advertRouter.post('/advert/modify/:advertId', (req, res, next)=>{
 	let id = req.params.advertId
 	Advert.findById(id, (err, advert)=>{
 		if(err){
@@ -100,7 +100,7 @@ router.post('/advert/modify/:advertId', (req, res, next)=>{
 })
 
 //数据删除
-router.get('/advert/remove/:advertId', (req, res, next)=>{
+advertRouter.get('/advert/remove/:advertId', (req, res, next)=>{
 	try{
 		let id = req.params.advertId
 		Advert.remove({ _id: id }, err=>{
